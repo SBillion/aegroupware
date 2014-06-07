@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Mes sessions{% endblock %}
+
+{% block htmlHeaders %}
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/highcharts/highcharts.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/portal/progress.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="progressPage" class="formattedPage">
+	<h3 class="pageTitle">Historique  de sessions</h3>
+	{% if sessions %}
+	<div id="progressCont">
+		<div id="progressList">
+			<div id="tableContainer">
+				<table class="styledTable" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th class="progressDate">Date</th>
+							<th class="progressMark">Note</th>
+							<th class="progressComment">Commentaires</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for session in sessions %}
+							<tr>
+								<td class="progressDate">{{ session.event.start|date:"D j b Y, H\hi" }}</td>
+								<td class="progressMark">{{ session.mark }}</td>
+								<td class="progressComment">{{ session.comment }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+		{% if data %}
+		<div id="progressChart">
+			<div id="placeholder"></div>
+		</div>
+		{% endif %}
+	</div>
+	{% else %}
+	<div id="noHistory" class="ui-widget">
+		<div class="ui-state-highlight ui-corner-all">
+			<div class="icon-info"></div>
+			<p>
+				Vous n'avez aucun historique de session
+			</p>
+		</div>
+	</div>
+	{% endif %}
+
+	<div id="csrf_token">{% csrf_token %}</div>
+</div>
+<script type="text/javascript">
+{% if data %}
+	var data = {{data}};
+{% else %}
+	var data = null;
+{% endif %}
+var csrf_token = $('#csrf_token > div > input').val();
+</script>
+{% endblock %}

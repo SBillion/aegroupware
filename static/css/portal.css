@@ -1,0 +1,66 @@
+#progressPage #progressCont {
+	width: 980px;
+	position: relative;
+	min-height: 340px;
+}
+
+#progressPage #progressCont #progressList {
+	width: 440px;
+	position: absolute;
+	left: 0px;
+}
+
+#progressPage #progressCont #progressList #tableContainer {
+	display: block;
+	width: 440px;
+	height: 300px;
+	overflow: auto;
+}
+
+#progressPage #progressCont #progressList table .progressDate { width: 150px; }
+#progressPage #progressCont #progressList table .progressMark { width: 40px; }
+#progressPage #progressCont #progressList table .progressComment { width: 220px; text-align: justify; }
+
+#progressPage #progressCont #progressChart {
+	width: 520px;
+	position: absolute;
+	left: 455px;
+}
+
+#progressPage #progressCont #progressChart #placeholder {
+	width: 520px;
+	height: 300px;
+}
+
+#progressPage #noHistory {
+	width: 350px;
+	margin: auto;
+	margin-bottom: 40px;
+}
+
+#progressPage #noHistory .ui-state-highlight {
+	padding: 16px;
+	height: 48px;
+}
+
+#progressPage #noHistory .ui-state-highlight .icon-info {
+	float: left;
+	margin-right: 20px;
+}
+
+#progressPage #noHistory .ui-state-highlight p {
+	line-height: 48px;
+}
+
+#plannerPage #calendar .fc-header-title {
+	color: #772953;
+}
+
+#event_data_box {
+	display: none;
+}
+
+.tooltip_actions {
+	padding-top: 10px;
+	text-align: right;
+}

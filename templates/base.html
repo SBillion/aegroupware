@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+	<title>{% block basetitle %}AEGroupware {% endblock %}{% block title %}{% endblock %}</title>
+	{% block htmlinitHeaders %}{% endblock %}
+	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/layout.css" />
+	<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/jqueryui/pepper-grinder/jquery-ui-1.8.10.custom.css" />
+	<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/jquery/jquery-1.5.js"></script>
+	<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/jquery/jquery-ui-1.8.10.custom.min.js"></script>
+	<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/jquery/jquery.ui.datepicker-fr.js"></script>
+	<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.lavalamp.js"></script>
+	<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.defaultvalue.js"></script>
+	<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/global.js"></script>
+	{% block htmlHeaders %}{% endblock %}
+</head>
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+	<input type="hidden" id="sess_data" userid="{{request.user.id}}"/>
+	<div id="wrapper">
+		<div id="pageHeader">
+			{% block header %}
+			<div id="menuCont" class="pageWContainer">
+				<ul class="lavaLampNoImage">
+
+<li {% if "weblog" in request.META.PATH_INFO or "zinnia" in request.META.PATH_INFO%}
+  class="current"{% endif %}>
+	<a href="/weblog/">Blog</a>
+</li>
+<li {% if "/forum/" in request.META.PATH_INFO or "djangobb" in request.META.PATH_INFO %}
+  class="current"{% endif %}>
+	<a href="/forum/">Forum</a>
+</li>
+<li {% if "/offers/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/offers/">Nos offres</a>
+</li>
+{% if user.is_anonymous %}
+<li {% if "/account/login/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/account/login/">Connexion</a>
+</li>
+{% else %}
+<li {% if "/portal/progress/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/portal/progress/">Progression</a>
+</li>
+<li {% if "/portal/planner/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/portal/planner/">Planning</a>
+</li>
+{% if perms.agency.add_vehicle %}
+<li {% if "/admin/agency/vehicle/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/admin/agency/vehicle/">Véhicules</a>
+</li>
+{% endif %}
+{% if perms.portal.change_session %}
+<li {% if "/admin/portal/session/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/admin/portal/session/">Sessions</a>
+</li>
+{% endif %}
+{% if perms.product %}
+<li {% if "/admin/product/product/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/admin/product/product/">Produits</a>
+</li>
+{% endif %}
+<li {% if "/account/logout/" in request.META.PATH_INFO %}class="current"{% endif %}>
+	<a href="/account/logout/">Déconnexion</a>
+</li>
+{% endif %}
+
+				</ul>
+			</div>
+			{% endblock %}
+		</div>
+		{% block pagecontent %}
+		<div id="pageContent">
+			{% block content %}{% endblock %}
+		</div>
+		{% endblock %}
+	</div>
+	<div id="pageFooter">
+		{% block footer %}{% endblock %}
+	</div>
+	<div id="defaultDialogs">
+		<div id="errorDialog" title="<?=T_("Error")?>">
+			<div id="dialogIcon"></div>
+			<div id="dialogMsg">
+				<p></p>
+			</div>
+			<div class="clear-elem"></div>
+		</div>
+		<div id="confirmDialog" title="<?=T_("Confirm")?>">
+			<div id="dialogIcon"></div>
+			<div id="dialogMsg">
+				<p></p>
+			</div>
+			<div class="clear-elem"></div>
+		</div>
+	</div>
+</body>
+</html>
+

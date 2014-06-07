@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Nos offres{% endblock %}
+
+{% block content %}
+<div id="progressPage" class="formattedPage">
+
+	<h3 class="pageTitle">Nos offres</h3>
+    <div id="tableContainer">
+        <table class="styledTable" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Détails</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>{{ product.designation }}</td>
+                        <td>{{ product.price }}</td>
+                        <td><a href="{{ product.desc_url }}">Détails</a></td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td>Nous n'avons aucune offre à vous proposer pour le moment.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}

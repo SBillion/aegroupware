@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block htmlHeaders %}
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/account/account.js"></script>
+{% endblock %}
+
+{% block content %}
+
+	<div id="loginPage" class="shadowedBox">
+		<h3 class="pageTitle">Connexion à l'auto école</h3>
+		<form id="loginForm" method="POST">{% csrf_token %}
+			<input type="text" name="username" id="username" placeholder="Nom d'utilisateur" class="input-size-medium"><br />
+			<input type="password" name="password" id="password" placeholder="Mot de passe" class="input-size-medium"><br />
+			<input type="submit" id="loginBtn" class="common-button" value="Se connecter" />
+			
+			{% if messages %}
+				{% for message in messages %}
+					<div id="loginError" class="ui-state-error ui-corner-all">
+						<div class="icon-error"></div>
+							<p>{{ message }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			{% endif %}
+			
+			<input type="hidden" name="next" value="{{ next|escape }}" />
+		</form>
+	</div>
+
+{% endblock %}
+

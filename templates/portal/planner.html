@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Mon planning{% endblock %}
+
+{% block htmlHeaders %}
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}js/fullcalendar/fullcalendar.css" />
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/jquery.multiselect2side.css" />
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/fullcalendar/fullcalendar.min.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.cookie.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.timePicker.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.ui.selectmenu.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.qtip.min.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/shared/jquery.multiselect2side.js"></script>
+<script language="javascript" type="text/javascript" src="{{ MEDIA_URL }}js/portal/planner.js"></script>
+{% endblock %}
+
+{% block content %}
+<div id="plannerPage" class="formattedPage">
+	<h3 class="pageTitle">Mon planning</h3>
+	<div id="calendar"></div>
+</div>
+<div class="windowsCont">
+	<div id="new_event" title="Nouvel événement">
+		<table class="formattedDialogTable" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="label">Type</td>
+				<td class="data">
+					<select id="event_type">
+						{% for event_key, event_label in event_types %}
+							<option value="{{ event_key }}">{{ event_label }}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr id="max_slots_cont">
+				<td class="label">Places maximum</td>
+				<td class="data">
+					<p id="max_slots"></p>
+				</td>
+			</tr>
+			<tr id="selected_cars">
+				<td class="label">V&eacute;hicules utilis&eacute;s</td>
+				<td class="data">
+					<select multiple="multiple" id="selected_cars_slt"></select>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Début</td>
+				<td class="data">
+					<input type="text" class="input-size-normal" id="start_date" />
+					<input type="text" class="input-size-normal" id="start_time" />
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Fin</td>
+				<td class="data">
+					<input type="text" class="input-size-normal" id="end_date" />
+					<input type="text" class="input-size-normal" id="end_time" />
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="user_reg_dialog" title="Inscription d'un client">
+		<input type="hidden" id="event_id" value=""/>
+		<table class="formattedDialogTable" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="label">Client</td>
+				<td class="data">
+					<select id="users_list">
+						{% for customer in customers %}
+							<option value="{{ customer.id }}">{{ customer.last_name }} {{ customer.first_name }} ({{ customer.username }})</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Evénement</td>
+				<td class="data"><span id="urd_event_desc"></span></td>
+			</tr>
+			<tr>
+				<td class="label">Date</td>
+				<td class="data"><span id="urd_event_date"></span></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div id="event_data_box"></div>
+<div id="csrf_token">{% csrf_token %}</div>
+<script type="text/javascript">
+{% autoescape off %}
+	var rights = {{ rights }};
+	var default_limits = {{ default_limits }};
+	var csrf_token = "{{ csrf_token }}";
+{% endautoescape %}
+</script>
+{% endblock %}

@@ -1,0 +1,51 @@
+#loginPage {
+	width: 310px;
+	margin: auto;
+	padding: 20px;
+}
+
+#loginPage #loginForm {
+	text-align: center;
+}
+
+#loginPage #loginForm input[type="text"],
+#loginPage #loginForm input[type="password"] {
+	text-align: center;
+	margin-bottom: 12px;
+	width: 220px;
+}
+
+input::-webkit-input-placeholder {
+	text-align: center;
+	text-shadow: 0px -1px 0px #38506b;
+	color: #aaa;
+}
+
+input:-moz-placeholder {
+	text-align: center;
+	text-shadow: 0px -1px 0px #38506b;
+	color: #aaa;
+}
+
+#loginPage #loginError {
+	width: 280px;
+	margin: auto;
+	margin-bottom: 40px;
+}
+
+#loginPage #loginError.ui-state-error {
+	margin-top: 20px;
+	margin-bottom: 0px;
+	padding: 16px;
+	height: 48px;
+}
+
+#loginPage #loginError.ui-state-error .icon-error {
+	float: left;
+	margin-right: 20px;
+}
+
+#loginPage #loginError.ui-state-error p {
+	line-height: 22px;
+	text-align: left;
+}
